@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="Tutorial">
+        <class>com.data.Person</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+        <properties>
+            <!-- H2 内存 DB -->
+            <property name="javax.jdo.option.ConnectionURL" value="jdbc:mysql://localhost:3306/jdo"/>
+            <property name="javax.jdo.option.ConnectionDriverName" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.jdo.option.ConnectionUserName" value="root"/>
+            <property name="javax.jdo.option.ConnectionPassword" value="00000000"/>
+
+            <!-- 指定数据库映射（可选）-->
+<!--            <property name="javax.jdo.option.Mapping" value="h2"/>-->
+
+            <!-- 自动创建表 -->
+            <property name="datanucleus.schema.autoCreateAll" value="true"/>
+            <!-- 可打开 DataNucleus 日志（调试时开启） -->
+            <!-- <property name="datanucleus.logging.level" value="DEBUG"/> -->
+        </properties>
+    </persistence-unit>
+</persistence>

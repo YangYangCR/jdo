@@ -12,7 +12,8 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <!-- DataNucleus 6.x 系列示例版本 -->
-        <datanucleus.version>6.0.5</datanucleus.version>
+<!--        <datanucleus.version>6.0.5</datanucleus.version>-->
+        <datanucleus.version>5.2.8</datanucleus.version>
         <jdo.api.version>3.2</jdo.api.version>
         <h2.version>2.1.214</h2.version>
     </properties>
@@ -48,6 +49,14 @@
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.49</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -56,19 +65,19 @@
             <plugin>
                 <groupId>org.datanucleus</groupId>
                 <artifactId>datanucleus-maven-plugin</artifactId>
-                <version>6.0.0-release</version>
+                <version>5.2.1</version> <!-- 根据你用的 datanucleus 版本调整 -->
                 <executions>
-                    <!-- 在 compile 后自动增强持久化类 -->
                     <execution>
-                        <id>enhancer</id>
+                        <id>enhance</id>
                         <phase>process-classes</phase>
-                        <goals>
-                            <goal>enhance</goal>
-                        </goals>
+                        <goals><goal>enhance</goal></goals>
                         <configuration>
                             <api>JDO</api>
                             <persistenceUnitName>Tutorial</persistenceUnitName>
                             <verbose>true</verbose>
+                            <enhancerProperties>
+                                <property>datanucleus.enhancer.verbose=true</property>
+                            </enhancerProperties>
                         </configuration>
                     </execution>
                 </executions>
@@ -80,7 +89,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>com.example.jdo.Main</mainClass>
+                    <mainClass>com.data.Main</mainClass>
                 </configuration>
             </plugin>
 
